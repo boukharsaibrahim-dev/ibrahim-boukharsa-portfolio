@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ibrahim Boukharsa - Développeur Web & Mobile</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Library pour les animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --text-color: #333;
+            --text-light: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #a393fb 0%, #57d0f5 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-dark: linear-gradient(135deg, #2c3e50 0%, #1a2530 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: #f9f9f9;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        /* Header / Hero Section */
+        .hero {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 150px 0 100px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, transparent 70%);
+            top: -50%;
+            left: -50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            animation: pulse 2s infinite, floatUpDown 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(52, 152, 219, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0); }
+        }
+        
+        @keyframes floatUpDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        
+        .btn-custom {
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: var(--transition);
+            margin: 0 10px 10px;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+        
+        .btn-primary-custom {
+            background: var(--gradient-secondary);
+            border: none;
+            color: white;
+        }
+        
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-outline-light-custom {
+            border: 2px solid white;
+            color: white;
+            background: transparent;
+        }
+        
+        .btn-outline-light-custom:hover {
+            background-color: white;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 15px 0;
+            transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            bottom: 0;
+            left: 0;
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link:hover {
+            color: var(--secondary-color) !important;
+        }
+        
+        /* About Section */
+        .about {
+            background-color: var(--light-color);
+        }
+        
+        .social-links {
+            margin-top: 30px;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            transition: var(--transition);
+            animation: bounce 2s infinite;
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            animation: rotate  linear infinite;
+            text-decoration: none;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            background-color: #fff;
+        }
+        
+        .portfolio-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            background: none;
+            border: none;
+            padding: 8px 20px;
+            margin: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 30px;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--gradient-secondary);
+            color: white;
+        }
+        
+        .portfolio-item {
+            margin-bottom: 30px;
+            transition: var(--transition);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .portfolio-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .portfolio-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.05);
+        }
+        
+        .portfolio-content {
+            padding: 20px;
+            background-color: white;
+        }
+        
+        .project-tech {
+            margin-top: 10px;
+        }
+        
+        .tech-badge {
+            display: inline-block;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        /* Skills Section */
+        .skills {
+            background-color: var(--light-color);
+        }
+        
+        .skill-item {
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.6s ease;
+        }
+        
+        .skill-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .skill-bar {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 5px;
+            width: 0;
+            transition: width 1.5s ease-in-out;
+        }
+        
+        /* Contact Section */
+        .contact-form {
+            background-color: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .form-control {
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            border: 1px solid #e1e5eb;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+        
+        .submit-btn {
+            background: var(--gradient-secondary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: var(--transition);
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Modal Styles */
+        .modal-content {
+            border-radius: var(--border-radius);
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            border-bottom: 1px solid #e9ecef;
+            padding: 20px 30px;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .modal-project-img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+        }
+        
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .project-gallery img {
+            width: 100%;
+            border-radius: var(--border-radius);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: floatRandom 15s infinite linear;
+        }
+        
+        @keyframes floatRandom {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(50px, 50px) rotate(90deg);
+            }
+            50% {
+                transform: translate(100px, 0) rotate(180deg);
+            }
+            75% {
+                transform: translate(50px, -50px) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .project-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-code me-2"></i>Ibrahim Boukharsa</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">À propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#portfolio">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Compétences</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <img src="PROFILE1.jpg" alt="Photo de Ibrahim Boukharsa" class="profile-img">
+                <h1>Ibrahim Boukharsa</h1>
+                <p>Développeur Web & Mobile passionné, créant des solutions innovantes avec les technologies modernes</p>
+                <div class="hero-buttons">
+                    <a href="#portfolio" class="btn btn-primary-custom btn-custom"><i class="fas fa-briefcase me-2"></i>Voir mes projets</a>
+                    <a href="#" class="btn btn-outline-light-custom btn-custom" id="downloadCV"><i class="fas fa-download me-2"></i>Télécharger mon CV</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="floating-element" style="top: 10%; left: 5%;"></div>
+        <div class="floating-element" style="top: 20%; right: 10%;"></div>
+        <div class="floating-element" style="bottom: 30%; left: 15%;"></div>
+        <div class="floating-element" style="bottom: 20%; right: 5%;"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">À propos de moi</h2>
+            <div class="row">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="feature-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>Qui suis-je ?</h3>
+                    <p>Je suis Ibrahim Boukharsa, un développeur web et mobile passionné par la création d'applications et de sites web performants. Bien que je n'aie pas encore d'expérience professionnelle, j'ai développé plusieurs projets personnels qui démontrent mes compétences et ma passion pour le développement.</p>
+                    <p>Je suis constamment à la recherche de nouveaux défis et d'opportunités d'apprentissage pour améliorer mes compétences et rester à jour avec les dernières tendances technologiques.</p>
+                    
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/ibrahim-boukharsa-19500a2a7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/boukharsaibrahim-dev" class="social-icon">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://wa.me/qr/A6IXHN5WWONQN1" class="social-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Mes compétences générales</h3>
+                    <ul>
+                        <li><i class="fas fa-check me-2 text-success"></i>Développement front-end (HTML, CSS, BOOTSTRAP, JavaScript)</li>
+                        <li><i class="fas fa-check me-2 text-success"></i>Développement back-end (PHP, PYTHON, C++, JAVA, MySQL)</li>
+                        <li><i class="fas fa-check me-2 text-success"></i>Développement d'applications mobiles</li>
+                        <li><i class="fas fa-check me-2 text-success"></i>Conception d'interfaces utilisateur responsives</li>
+                        <li><i class="fas fa-check me-2 text-success"></i>Développement d'applications web complètes</li>
+                        <li><i class="fas fa-check me-2 text-success"></i>Gestion de bases de données</li>
+                        <li><i class="fas fa-check me-2 text-success"></i>Résolution de problèmes et débogage</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary-custom btn-custom mt-3"><i class="fas fa-download me-2"></i>Télécharger mon CV</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Mes Projets</h2>
+            
+            <!-- Grille de projets -->
+            <div class="row" id="portfolio-grid">
+                <!-- Projet 1 - Coffee Shop -->
+                <div class="col-lg-4 col-md-6 portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="100">
+                    <div class="portfolio-card">
+                        <div class="portfolio-content">
+                            <div class="feature-icon">
+                                <i class="fas fa-coffee"></i>
+                            </div>
+                            <h4>Site Web Coffee Shop</h4>
+                            <p>Site web complet pour un café avec présentation des produits, menu en ligne et système de réservation.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">HTML</span>
+                                <span class="tech-badge">CSS</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">PHP</span>
+                                <span class="tech-badge">MySQL</span>
+                                <span class="tech-badge">Bootstrap</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary view-project mt-2" data-bs-toggle="modal" data-bs-target="#projectModal" data-id="1"><i class="fas fa-eye me-1"></i>Voir détails</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projet 2 - Système de Gestion Hôtelière -->
+                <div class="col-lg-4 col-md-6 portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-card">
+                        <div class="portfolio-content">
+                            <div class="feature-icon">
+                                <i class="fas fa-hotel"></i>
+                            </div>
+                            <h4>Système de Gestion Hôtelière</h4>
+                            <p>Application web de gestion hôtelière avec réservations, gestion des chambres et facturation.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">HTML</span>
+                                <span class="tech-badge">CSS</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">PHP</span>
+                                <span class="tech-badge">MySQL</span>
+                                <span class="tech-badge">Bootstrap</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary view-project mt-2" data-bs-toggle="modal" data-bs-target="#projectModal" data-id="2"><i class="fas fa-eye me-1"></i>Voir détails</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 3 - Portfolio -->
+                <div class="col-lg-4 col-md-6 portfolio-item" data-category="web" data-aos="fade-up" data-aos-delay="300">
+                    <div class="portfolio-card">
+                        <div class="portfolio-content">
+                            <div class="feature-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h4>Portfolio Personnel</h4>
+                            <p>Site portfolio responsive présentant mes compétences et projets avec design moderne et animations.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">HTML</span>
+                                <span class="tech-badge">CSS</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">Bootstrap</span>
+                                <!--<span class="tech-badge">Font Awesome</span>-->
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary view-project mt-2" data-bs-toggle="modal" data-bs-target="#projectModal" data-id="3"><i class="fas fa-eye me-1"></i>Voir détails</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 4 - Application de Gestion de Stock -->
+                <div class="col-lg-4 col-md-6 portfolio-item" data-category="desktop" data-aos="fade-up" data-aos-delay="400">
+                    <div class="portfolio-card">
+                        <div class="portfolio-content">
+                            <div class="feature-icon">
+                                <i class="fas fa-boxes"></i>
+                            </div>
+                            <h4>Application de Gestion de Stock</h4>
+                            <p>Application desktop pour la gestion de stock avec interface graphique et base de données.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">Tkinter</span>
+                                <span class="tech-badge">SQLite</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary view-project mt-2" data-bs-toggle="modal" data-bs-target="#projectModal" data-id="4"><i class="fas fa-eye me-1"></i>Voir détails</button>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                
+    </section>
+
+    <!-- Modal pour les projets -->
+    <div class="modal fade" id="projectModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="projectModalTitle">Détails du Projet</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="projectModalBody">
+                    <!-- Contenu dynamique -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Mes Compétences</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="skill-item" data-aos="fade-right" data-aos-delay="100">
+                        <div class="skill-info">
+                            <span><i class="fab fa-html5 me-2"></i>HTML/CSS</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item" data-aos="fade-right" data-aos-delay="200">
+                        <div class="skill-info">
+                            <span><i class="fab fa-js-square me-2"></i>JavaScript</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item" data-aos="fade-right" data-aos-delay="300">
+                        <div class="skill-info">
+                            <span><i class="fab fa-php me-2"></i>PHP</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item" data-aos="fade-right" data-aos-delay="400">
+                        <div class="skill-info">
+                            <span><i class="fab fa-python me-2"></i>Python</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="skill-item" data-aos="fade-left" data-aos-delay="100">
+                        <div class="skill-info">
+                            <span><i class="fas fa-database me-2"></i>MySQL</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item" data-aos="fade-left" data-aos-delay="200">
+                        <div class="skill-info">
+                            <span><i class="fab fa-java me-2"></i>Java</span>
+                            <span>40%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="40"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item" data-aos="fade-left" data-aos-delay="300">
+                        <div class="skill-info">
+                            <span><i class="fas fa-mobile-alt me-2"></i>Kotlin</span>
+                            <span>60%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="60"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item" data-aos="fade-left" data-aos-delay="400">
+                        <div class="skill-info">
+                            <span><i class="fas fa-copyright me-2"></i>C++</span>
+                            <span>50%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="50"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contactez-moi</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form" data-aos="zoom-in">
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Votre nom" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" placeholder="Votre email" required>
+                                </div>
+                            </div>
+                            <textarea class="form-control" rows="5" placeholder="Votre message" required></textarea>
+                            <button type="submit" class="submit-btn"><i class="fas fa-paper-plane me-2"></i>Envoyer le message</button>
+                        </form>
+                        <div id="formMessage" class="mt-3 text-center" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ibrahim Boukharsa. Tous droits réservés.</p>
+            <div class="mt-3">
+                <a href="https://www.linkedin.com/in/ibrahim-boukharsa-19500a2a7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-light me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+                <a href="https://github.com/boukharsaibrahim-dev" class="text-light me-3"><i class="fab fa-github fa-lg"></i></a>
+                <a href="https://wa.me/qr/A6IXHN5WWONQN1" class="text-light me-3"><i class="fab fa-whatsapp fa-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Library pour les animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Script personnalisé -->
+    <script>
+        // Initialiser AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+        
+        // Données des projets pour les modales
+        const projects = {
+            1: {
+                title: "Site Web Coffee Shop",
+                description: "Site web complet pour un café avec présentation des produits et système de réservation.",
+                fullDescription: "Ce projet est un site web complet développé pour un café fictif. Il présente les différents produits, un menu détaillé et inclut un système de réservation en ligne. Le site est entièrement responsive et offre une expérience utilisateur optimale sur tous les appareils. J'ai développé ce projet en utilisant HTML, CSS, JavaScript pour le front-end, et PHP avec MySQL pour le back-end.",
+                technologies: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL"],
+                images: [
+                    "https://via.placeholder.com/800x450/3498db/ffffff?text=Coffee+Shop+1",
+                    "https://via.placeholder.com/800x450/e74c3c/ffffff?text=Coffee+Shop+2",
+                    "https://via.placeholder.com/800x450/2ecc71/ffffff?text=Coffee+Shop+3"
+                ],
+                features: [
+                    "Design responsive et moderne",
+                    "Système de réservation en ligne",
+                    "Menu interactif avec filtres",
+                    "Interface d'administration",
+                    "Base de données pour stocker les réservations"
+                ],
+                liveLink: "#",
+                githubLink: "#"
+            },
+            2: {
+                title: "Système de Gestion Hôtelière",
+                description: "Application web de gestion hôtelière avec réservations et facturation.",
+                fullDescription: "Ce système de gestion hôtelière permet de gérer les réservations, les chambres, les clients et la facturation. Il inclut un tableau de bord administratif pour suivre les réservations en cours et l'occupation des chambres. L'interface est intuitive et conçue pour faciliter la gestion quotidienne d'un hôtel. J'ai utilisé Bootstrap pour créer une interface responsive et attrayante.",
+                technologies: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL", "Bootstrap"],
+                images: [
+                    "https://via.placeholder.com/800x450/9b59b6/ffffff?text=Hotel+System+1",
+                    "https://via.placeholder.com/800x450/34495e/ffffff?text=Hotel+System+2",
+                    "https://via.placeholder.com/800x450/f39c12/ffffff?text=Hotel+System+3"
+                ],
+                features: [
+                    "Gestion des réservations et des chambres",
+                    "Tableau de bord administratif",
+                    "Système de facturation intégré",
+                    "Gestion des clients et historique",
+                    "Rapports d'occupation et de revenus"
+                ],
+                liveLink: "#",
+                githubLink: "#"
+            },
+            3: {
+                title: "Portfolio Personnel",
+                description: "Site portfolio responsive présentant mes compétences et projets.",
+                fullDescription: "Ce portfolio personnel présente mes compétences en développement web et mobile ainsi que mes projets réalisés. J'ai conçu ce site avec un design moderne et responsive, en utilisant HTML, CSS, JavaScript et Bootstrap. Le site inclut des animations fluides, une navigation intuitive et une présentation claire de mes réalisations.",
+                technologies: ["HTML5", "CSS3", "JavaScript", "Bootstrap", "Font Awesome"],
+                images: [
+                    "https://via.placeholder.com/800x450/1abc9c/ffffff?text=Portfolio+1",
+                    "https://via.placeholder.com/800x450/16a085/ffffff?text=Portfolio+2"
+                ],
+                features: [
+                    "Design responsive et moderne",
+                    "Animations fluides et interactives",
+                    "Présentation claire des compétences",
+                    "Galerie de projets avec filtres",
+                    "Formulaire de contact fonctionnel"
+                ],
+                liveLink: "#",
+                githubLink: "#"
+            },
+            4: {
+                title: "Application de Gestion de Stock",
+                description: "Application desktop pour la gestion de stock avec interface graphique.",
+                fullDescription: "Cette application desktop développée en Python avec Tkinter permet aux petites entreprises de gérer leur inventaire. Elle inclut des fonctionnalités d'ajout, de modification et de suppression de produits, ainsi que la génération de rapports. La base de données SQLite assure un stockage local efficace des données.",
+                technologies: ["Python", "Tkinter", "SQLite"],
+                images: [
+                    "https://via.placeholder.com/800x450/e67e22/ffffff?text=Stock+App+1",
+                    "https://via.placeholder.com/800x450/d35400/ffffff?text=Stock+App+2"
+                ],
+                features: [
+                    "Gestion complète des produits",
+                    "Interface graphique intuitive",
+                    "Génération de rapports PDF",
+                    "Base de données locale SQLite",
+                    "Recherche et filtrage avancés"
+                ],
+                liveLink: "#",
+                githubLink: "#"
+            },
+            5: {
+                title: "Site E-commerce",
+                description: "Plateforme de vente en ligne avec panier et système de paiement.",
+                fullDescription: "Ce site e-commerce complet permet aux utilisateurs de parcourir des produits, les ajouter au panier et effectuer des achats en ligne. J'ai intégré l'API Stripe pour les paiements sécurisés et développé un système de gestion des commandes pour l'administrateur.",
+                technologies: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL", "Stripe API"],
+                images: [
+                    "https://via.placeholder.com/800x450/3498db/ffffff?text=E-commerce+1",
+                    "https://via.placeholder.com/800x450/e74c3c/ffffff?text=E-commerce+2",
+                    "https://via.placeholder.com/800x450/2ecc71/ffffff?text=E-commerce+3"
+                ],
+                features: [
+                    "Catalogue de produits avec filtres",
+                    "Panier d'achat persistant",
+                    "Système de paiement sécurisé Stripe",
+                    "Gestion des commandes et des stocks",
+                    "Interface d'administration complète"
+                ],
+                liveLink: "#",
+                githubLink: "#"
+            },
+            6: {
+                title: "Application Météo",
+                description: "Application mobile affichant les prévisions météo avec géolocalisation.",
+                fullDescription: "Cette application mobile utilise la géolocalisation pour afficher les prévisions météo actuelles et futures de l'emplacement de l'utilisateur. Elle intègre une API météo externe et propose des alertes météo personnalisables.",
+                technologies: ["Kotlin", "API REST", "JSON", "GPS"],
+                images: [
+                    "https://via.placeholder.com/800x450/9b59b6/ffffff?text=Weather+App+1",
+                    "https://via.placeholder.com/800x450/34495e/ffffff?text=Weather+App+2"
+                ],
+                features: [
+                    "Prévisions météo actuelles et à 5 jours",
+                    "Géolocalisation automatique",
+                    "Recherche par ville",
+                    "Alertes météo personnalisables",
+                    "Interface intuitive avec icônes météo"
+                ],
+                liveLink: "#",
+                githubLink: "#"
+            }
+        };
+        
+        // Animation au défilement
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+        
+        function handleScrollAnimation() {
+            const skillItems = document.querySelectorAll('.skill-item');
+            
+            skillItems.forEach(item => {
+                if (isElementInViewport(item)) {
+                    item.classList.add('visible');
+                    const progressBar = item.querySelector('.skill-progress');
+                    const width = progressBar.getAttribute('data-width');
+                    progressBar.style.width = width + '%';
+                }
+            });
+        }
+        
+        // Gestion des modales de projets
+        document.addEventListener('DOMContentLoaded', function() {
+            const viewProjectButtons = document.querySelectorAll('.view-project');
+            const projectModal = new bootstrap.Modal(document.getElementById('projectModal'));
+            const projectModalTitle = document.getElementById('projectModalTitle');
+            const projectModalBody = document.getElementById('projectModalBody');
+            
+            viewProjectButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const projectId = this.getAttribute('data-id');
+                    const project = projects[projectId];
+                    
+                    if (project) {
+                        projectModalTitle.textContent = project.title;
+                        
+                        let modalContent = `
+                            <img src="${project.images[0]}" alt="${project.title}" class="modal-project-img">
+                            <h5>Description</h5>
+                            <p>${project.fullDescription}</p>
+                            
+                            <h5>Fonctionnalités</h5>
+                            <ul>
+                        `;
+                        
+                        project.features.forEach(feature => {
+                            modalContent += `<li><i class="fas fa-check text-success me-2"></i>${feature}</li>`;
+                        });
+                        
+                        modalContent += `</ul>`;
+                        
+                        modalContent += `
+                            <h5>Technologies utilisées</h5>
+                            <div class="mb-3">
+                        `;
+                        
+                        project.technologies.forEach(tech => {
+                            modalContent += `<span class="badge bg-primary me-1">${tech}</span>`;
+                        });
+                        
+                        modalContent += `</div>`;
+                        
+                        if (project.images.length > 1) {
+                            modalContent += `<h5>Galerie du projet</h5><div class="project-gallery">`;
+                            
+                            project.images.forEach((img, index) => {
+                                if (index > 0) {
+                                    modalContent += `<img src="${img}" alt="Projet ${project.title} ${index}">`;
+                                }
+                            });
+                            
+                            modalContent += `</div>`;
+                        }
+                        
+                        if (project.liveLink || project.githubLink) {
+                            modalContent += `<h5>Liens</h5><div class="mb-3">`;
+                            
+                            if (project.liveLink) {
+                                modalContent += `<a href="${project.liveLink}" target="_blank" class="btn btn-sm btn-outline-primary me-2"><i class="fas fa-external-link-alt me-1"></i>Voir le projet</a>`;
+                            }
+                            
+                            if (project.githubLink) {
+                                modalContent += `<a href="${project.githubLink}" target="_blank" class="btn btn-sm btn-outline-dark"><i class="fab fa-github me-1"></i>Code source</a>`;
+                            }
+                            
+                            modalContent += `</div>`;
+                        }
+                        
+                        projectModalBody.innerHTML = modalContent;
+                    }
+                });
+            });
+            
+            // Animation des éléments au chargement
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            portfolioItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('visible');
+                }, index * 200);
+            });
+            
+            // Gestion du formulaire de contact
+            const contactForm = document.getElementById('contactForm');
+            const formMessage = document.getElementById('formMessage');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulation d'envoi
+                formMessage.innerHTML = '<i class="fas fa-check-circle me-2"></i>Message envoyé avec succès !';
+                formMessage.style.color = "green";
+                formMessage.style.display = "block";
+                
+                // Réinitialiser le formulaire
+                contactForm.reset();
+                
+                // Cacher le message après 5 secondes
+                setTimeout(() => {
+                    formMessage.style.display = "none";
+                }, 5000);
+            });
+            
+            // Téléchargement du CV
+            document.getElementById('downloadCV').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert("Téléchargement du CV en cours...");
+                // Ici, vous ajouteriez le code pour télécharger le fichier PDF
+            });
+            
+            // Écouteur de défilement pour les animations
+            window.addEventListener('scroll', handleScrollAnimation);
+            window.addEventListener('load', handleScrollAnimation);
+        });
+    </script>
+</body>
+</html>
